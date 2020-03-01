@@ -10,15 +10,6 @@ import {
 import { Rule } from '../entity/Rule';
 
 @InputType()
-class RuleInput {
-  @Field()
-  srcAddr: string;
-
-  @Field()
-  dstAddr: string;
-}
-
-@InputType()
 class RuleUpdateInput {
   @Field(() => String, { nullable: true })
   srcAddr?: string;
@@ -35,8 +26,11 @@ export class RuleResolver {
   }
 
   @Mutation(() => Boolean)
-  async createRule(@Arg('rule', () => RuleInput) rule: RuleInput) {
-    await Rule.insert(rule);
+  async createRule(
+    @Arg('srcAddr') srcAddr: string,
+    @Arg('dstAddr') dstAddr: string
+  ) {
+    await Rule.insert({ srcAddr, dstAddr });
     return true;
   }
 
