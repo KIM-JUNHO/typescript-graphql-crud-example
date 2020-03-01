@@ -35,8 +35,8 @@ export class RuleResolver {
   }
 
   @Mutation(() => Boolean)
-  async createRule(@Arg('rules', () => [RuleInput]) rules: [RuleInput]) {
-    await Rule.insert(rules);
+  async createRule(@Arg('rule', () => RuleInput) rule: RuleInput) {
+    await Rule.insert(rule);
     return true;
   }
 
