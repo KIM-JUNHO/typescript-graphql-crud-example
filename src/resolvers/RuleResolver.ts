@@ -3,9 +3,9 @@ import { Rule } from '../entity/Rule';
 
 @Resolver()
 export class RuleResolver {
-  @Query(() => String)
-  hello() {
-    return 'hi!';
+  @Query(() => [Rule])
+  Rules() {
+    return Rule.find();
   }
 
   @Mutation(() => Boolean)
