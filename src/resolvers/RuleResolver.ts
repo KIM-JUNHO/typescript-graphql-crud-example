@@ -48,4 +48,10 @@ export class RuleResolver {
     await Rule.update({ id }, rule);
     return true;
   }
+
+  @Mutation(() => Boolean)
+  async deleteRule(@Arg('id', () => Int) id: number) {
+    await Rule.delete({ id });
+    return true;
+  }
 }
