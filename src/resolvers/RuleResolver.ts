@@ -18,6 +18,15 @@ class RuleInput {
   dstAddr: string;
 }
 
+@InputType()
+class RuleUpdateInput {
+  @Field(() => String, { nullable: true })
+  srcAddr?: string;
+
+  @Field(() => String, { nullable: true })
+  dstAddr?: string;
+}
+
 @Resolver()
 export class RuleResolver {
   @Query(() => [Rule])
@@ -34,7 +43,7 @@ export class RuleResolver {
   @Mutation(() => Boolean)
   async updateRule(
     @Arg('id', () => Int) id: number,
-    @Arg('rule', () => RuleInput) rule: RuleInput
+    @Arg('rule', () => RuleUpdateInput) rule: RuleUpdateInput
   ) {
     await Rule.update({ id }, rule);
     return true;
