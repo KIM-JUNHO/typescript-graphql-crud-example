@@ -1,4 +1,5 @@
 import { Resolver, Mutation, Arg, Query } from 'type-graphql';
+import { Rule } from '../entity/Rule';
 
 @Resolver()
 export class RuleResolver {
@@ -8,8 +9,11 @@ export class RuleResolver {
   }
 
   @Mutation(() => Boolean)
-  createRule(@Arg('srcAddr') srcAddr: string, @Arg('dstAddr') dstAddr: string) {
-    console.log(srcAddr, dstAddr);
+  async createRule(
+    @Arg('srcAddr') srcAddr: string,
+    @Arg('dstAddr') dstAddr: string
+  ) {
+    await Rule.insert({ srcAddr, dstAddr });
     return true;
   }
 }
