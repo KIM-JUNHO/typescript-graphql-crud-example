@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Arg, Int } from 'type-graphql';
+import { Resolver, Mutation, Arg, Int, Query } from 'type-graphql';
 import { Movie } from '../entity/Movie';
 
 @Resolver()
@@ -10,5 +10,10 @@ export class MovieResolver {
   ) {
     await Movie.insert({ title, minutes });
     return true;
+  }
+
+  @Query(() => [Movie])
+  movies() {
+    return Movie.find();
   }
 }
